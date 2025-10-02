@@ -1,51 +1,39 @@
 import xml.etree.ElementTree as ET
-import os
 
-def parse_jacoco_with_source(xml_path, source_root):
-    tree = ET.parse(xml_path)
-    root = tree.getroot()
+XML_NAME = "report.xml" #xmlファイルの名前
 
-    class_coverages = {}
+def calc_coverages(xml_path):
+    xml_root = ET.parse(xml_path).getroot() # xmlデータの取得
+    coverages = {} # Map<クラス名,カバレッジ配列>
 
-    for cls in root.findall(".//class"):
-        class_name = cls.get("name")  # e.g. com/example/Main
-        sourcefile = cls.get("sourcefilename")  # e.g. Main.java
+    # パッケージ -> ソースファイルの順で探索
+    for xml_pkg in xml_root.findall("package"):
+        for xml_src in xml_pkg.findall("sourcefile"):
+            package_name = xml_pkg.get("name")  # ex) com/example
+            src_name =  xml_src.get("name")     # ex) Main.java
+            fqn = package_name + '/' + src_name # ex) com/example/Main.java
 
-        # パッケージ構造をパスに変換
-        package = cls.getparent().get("name") if hasattr(cls, "getparent") else None
-        if package:
-            src_path = os.path.join(source_root, package.replace(".", "/"), sourcefile)
-        else:
-            src_path = os.path.join(source_root, sourcefile)
+            xml_line = xml_src.findall("line")
+            covered = [False] * (int(xml_line[-1].get("nr")) + 1)  # boolean配列 (size = 最後の命令行番号)
 
-        if not os.path.exists(src_path):
-            print(f"Warning: source file not found for {class_name}: {src_path}")
-            continue
+            for xl in xml_line:
+                nr = int(xl.get("nr")) # line_number
+                ci = int(xl.get("ci")) # covered_instructions
+                covered[nr] = (ci > 0)
 
-        # ソースコードの総行数
-        with open(src_path, "r", encoding="utf-8") as f:
-            source_lines = f.readlines()
-        total_lines = len(source_lines)
+            coverages[fqn] = covered
+            
+    return coverages
 
-        # boolean 配列を全行分用意
-        covered = [False] * (total_lines + 1)  # 行番号は1始まり
-
-        # JaCoCoの行情報を反映
-        for line in cls.findall("line"):
-            nr = int(line.get("nr"))
-            ci = int(line.get("ci"))  # covered instructions
-            covered[nr] = (ci > 0)
-
-        class_coverages[class_name] = covered
-
-    return class_coverages
-
-
-# 使い方例
-if __name__ == "__main__":
-    coverages = parse_jacoco_with_source("report.xml", "src/main/java")
-
+def print_coverages(coverages):
     for cls, arr in coverages.items():
         print(f"Class: {cls}")
         for i in range(1, len(arr)):  # 行番号1から開始
             print(f"  Line {i}: {arr[i]}")
+
+
+if __name__ == "__main__":
+    
+    coverages = calc_coverages(XML_NAME) # xml ファイルからカバレッジの取得
+    print_coverages(coverages) 
+    
