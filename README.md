@@ -1,1 +1,7 @@
-"# SBFL_command" 
+# How to use
+
+## 
+
+``` console
+$ python command.py
+```
