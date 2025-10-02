@@ -1,3 +1,4 @@
 *.exec
 *.xml
 *.csv
+/.SBFL_data/
