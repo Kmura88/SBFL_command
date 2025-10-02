@@ -1,6 +1,5 @@
 import xml.etree.ElementTree as ET
-
-XML_NAME = "report.xml" #xmlファイルの名前
+import sys
 
 def calc_coverages(xml_path):
     xml_root = ET.parse(xml_path).getroot() # xmlデータの取得
@@ -32,8 +31,17 @@ def print_coverages(coverages):
             print(f"  Line {i}: {arr[i]}")
 
 
-if __name__ == "__main__":
-    
-    coverages = calc_coverages(XML_NAME) # xml ファイルからカバレッジの取得
+def main():
+    if len(sys.argv) < 2:
+        print("xml_analyzer [error] : 引数が指定されていません。")
+        return
+
+    coverages = calc_coverages(sys.argv[1]) # xml ファイルからカバレッジの取得
     print_coverages(coverages) 
+
+
+
+
+if __name__ == "__main__":
+    main()
     
