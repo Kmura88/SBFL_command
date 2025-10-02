@@ -26,6 +26,6 @@ rem .xmlの生成
 java -jar lib/jacococli.jar report %TMP_FOLDER%/jacoco.exec --classfiles classes --sourcefiles src --xml %TMP_FOLDER%/report.xml
 
 rem .xmlデータの読み込み
-python ./lib/xml_analyzer.py %TMP_FOLDER%/report.xml
+python ./lib/XmlAnalyzer.py %TMP_FOLDER%/report.xml
 
 rem rd /s /q %TMP_FOLDER% 
