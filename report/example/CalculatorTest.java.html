@@ -2,23 +2,49 @@
 
 <span class="nc" id="L3">public class CalculatorTest {</span>
     public static void main(String[] args) {
-<span class="fc" id="L5">        Calculator calc = new Calculator();</span>
+<span class="nc" id="L5">        Calculator calc = new Calculator();</span>
 
         // Test add method
-<span class="pc bpc" id="L8" title="1 of 2 branches missed.">        if (calc.add(2, 3) == 5) {</span>
-<span class="fc" id="L9">            System.out.println(&quot;Test add: PASSED&quot;);</span>
+<span class="nc bnc" id="L8" title="All 2 branches missed.">        if (calc.add(2, 3) == 5) {</span>
+<span class="nc" id="L9">            System.out.println(&quot;Test add: PASSED&quot;);</span>
         } else {
 <span class="nc" id="L11">            System.out.println(&quot;Test add: FAILED&quot;);</span>
         }
 
         // Test multiply method with zero
-<span class="pc bpc" id="L15" title="1 of 2 branches missed.">        if (calc.multiply(5, 100) == 500) {</span>
-<span class="fc" id="L16">            System.out.println(&quot;Test multiply (zero): PASSED&quot;);</span>
+<span class="nc bnc" id="L15" title="All 2 branches missed.">        if (calc.multiply(5, 100) == 500) {</span>
+<span class="nc" id="L16">            System.out.println(&quot;Test multiply (zero): PASSED&quot;);</span>
         } else {
 <span class="nc" id="L18">            System.out.println(&quot;Test multiply (zero): FAILED&quot;);</span>
         }
         
         // subtractメソッドはテストしない
-<span class="fc" id="L22">    }</span>
+<span class="nc" id="L22">    }</span>
 }
+
+/*
+ * package example;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class CalculatorTest {
+
+    // Calculatorのインスタンスを生成
+    private final Calculator calc = new Calculator();
+
+    @Test
+    void testAdd() {
+        // assertEquals(期待される値, 実際の値, &quot;テスト失敗時のメッセージ&quot;);
+        assertEquals(5, calc.add(2, 3), &quot;addメソッドのテストが失敗しました&quot;);
+    }
+
+    @Test
+    void testMultiply() {
+        assertEquals(500, calc.multiply(5, 100), &quot;multiplyメソッドのテストが失敗しました&quot;);
+    }
+
+    // subtractメソッドはテストしない
+}
+ */
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
