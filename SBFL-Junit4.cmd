@@ -2,6 +2,7 @@
 cd /d %~dp0
 
 set CLASS_NAME=%1
+set METHOD_NAME=testScalene1
 set TMP_FOLDER=.SBFL_data
 
 rem 構文チェック
@@ -32,10 +33,13 @@ mkdir %TMP_FOLDER%
 attrib +h %TMP_FOLDER%
 
 rem .execの生成
-java -javaagent:lib/jacoco/jacocoagent.jar=destfile=%TMP_FOLDER%/jacoco.exec,append=false -cp classes %CLASS_NAME%
+java -javaagent:lib/jacoco/jacocoagent.jar=destfile=%TMP_FOLDER%/jacoco.exec,append=false -cp "lib/junit/junit-4.13.2.jar;lib/junit/hamcrest-core-1.3.jar;classes" RunSingleTest %CLASS_NAME% %METHOD_NAME%
 
 rem .xmlの生成
 java -jar lib/jacoco/jacococli.jar report %TMP_FOLDER%/jacoco.exec --classfiles classes --sourcefiles src --xml %TMP_FOLDER%/report.xml
+
+rem htmlの生成
+java -jar lib/jacoco/jacococli.jar report %TMP_FOLDER%/jacoco.exec --classfiles classes --sourcefiles src --html report
 
 rem .xmlデータの読み込み
 python ./lib/XmlAnalyzer.py %TMP_FOLDER%/report.xml
