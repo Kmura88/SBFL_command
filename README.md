@@ -31,3 +31,12 @@ $ run.bat (class名)
 ```console
 $ run.bat com.example.MainTest
 ```
+
+# 必要
+1. .batのためWindows環境
+2. コマンドラインで`python`が実行できる
+3. コマンドラインで`java`が実行できる
+
+# メモ
+
+1. lib内のjacocoファイルは更新しても良い
