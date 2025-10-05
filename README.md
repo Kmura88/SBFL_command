@@ -9,6 +9,7 @@ eclipseでは`target/classes`フォルダと`target/test-classes`に分けてク
 ```
 classes/
 ├── RunSingleTest.class (Do not Delete!!)
+├── MethodParserAndRunner.class (Do not Delete!!)
 └── com/
     └── example/
         ├── MainTest.class
