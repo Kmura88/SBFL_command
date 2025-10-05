@@ -39,6 +39,11 @@ mkdir %TMP_FOLDER%\fail_test
 rem MethodParserAndRunnerの実行
 java -cp "lib/junit/junit-4.13.2.jar;lib/junit/hamcrest-core-1.3.jar;classes" MethodParserAndRunner %CLASS_NAME%
 
+rem MethodParserAndRunnerが異常終了した場合
+if %ERRORLEVEL% == 1 (
+	exit /b 1
+)
+
 rem suspeciousの計算 cdを一度libへ変更する。
 cd lib
 python SBFL_Ochiai.py

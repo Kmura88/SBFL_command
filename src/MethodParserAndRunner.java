@@ -19,7 +19,14 @@ public class MethodParserAndRunner {
         String cmdFilePath = "lib\\xml_maker_junit4.cmd";
 
         // 4. テストクラスのロード
-        Class<?> testClass = Class.forName(className);
+        Class<?> testClass;
+        try {
+            testClass = Class.forName(className);
+        } catch (ClassNotFoundException e) {
+            System.err.println("[ERROR]: Test class not found -> " + className);
+            System.exit(1);
+            return;
+        }
 
         // 5. @Test の付いたメソッドを順に処理
         for (Method method : testClass.getDeclaredMethods()) {

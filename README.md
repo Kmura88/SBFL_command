@@ -6,7 +6,7 @@ $ SBFL-junit4.cmd (testclass名)
 
 例
 ```console
-$ SBFL-junit4.cmd com.example.TriangleTest
+$ SBFL-junit4.cmd example.TriangleTest
 ```
 
 # 準備
