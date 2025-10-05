@@ -8,7 +8,7 @@ set CLASS_NAME=%1
 rem 構文チェック
 if "%CLASS_NAME%"=="" (
 	echo [Error] usage : %0 CLASS_NAME
-	exit /b
+	exit /b 1
 )
 
 rem 一時フォルダが既にあれば一旦削除 
@@ -19,13 +19,13 @@ if exist "%TMP_FOLDER%" (
 rem classesフォルダが有るか
 if not exist "classes" (
 	echo [Error] classes Folder not found.
-	exit /b
+	exit /b 1
 )
 
 rem srcフォルダが有るか
 if not exist "src" (
 	echo [Error] src Folder not found.
-	exit /b
+	exit /b 1
 )
 
 rem 一時フォルダの作成
@@ -39,4 +39,11 @@ mkdir %TMP_FOLDER%\fail_test
 rem MethodParserAndRunnerの実行
 java -cp "lib/junit/junit-4.13.2.jar;lib/junit/hamcrest-core-1.3.jar;classes" MethodParserAndRunner %CLASS_NAME%
 
-rem python ./lib/XmlAnalyzer.py %TMP_FOLDER%/fail_test/%CLASS_NAME%.%METHOD_NAME%.xml
+rem suspeciousの計算 cdを一度libへ変更する。
+cd lib
+python SBFL_Ochiai.py
+
+rem cdを戻す
+cd ..
+
+exit /b 0

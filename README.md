@@ -48,6 +48,7 @@ $ run.bat com.example.MainTest
 
 1. lib内のjacoco-0.8.13, junit は公式からダウンロード
 2. libでのフォルダ名はjacoco, junitにする必要あり。
+3. 文,ファイルによって参照している%cd%が異なり参照パスがぐちゃぐちゃ。
 
 <details><summary>内部での処理</summary>
 
@@ -69,13 +70,18 @@ $ run.bat com.example.MainTest
     - .execから.xmlを作成
         - `RunSingleTest`の返り値でテストのpass, failを判定
         - pass, failに応じて.xmlの格納場所の変更
-5. nf,ef,np,epの計算
+5. nf,ef,np,ep,suspeciousの計算
     - xmlファイルのデータを各クラスの行ごとのカバレッジ(boolean)に変換
         - `XmlAnalyzer.py`が担当
         - `/MethodParserAndRunner.java`,`/RunSingleTest.java`,末尾が`Test.java`で終わるファイルのカバレッジをここで無視する。
-    - xmlファイルを全探索して`XmlAnalyzer.py`を呼び出し、行ごとの実行回数(int)に変換
+    - xmlファイルを探索して`XmlAnalyzer.py`を呼び出し、行ごとの実行回数(int)に変換
         - `LineExcutionCounter.py`が担当
-    - 
+    - 行ごとの実行回数からep,ef,np,nfを計算
+        - `SBFL_base.py`が担当
+        - CSVへの書き出しなども行う
+    - suspeciousの計算
+        - `SBFL_Oshiai.py`が担当
+        - `SBFL_Oshiai.py`は`SBFL_base.py`の継承クラス
 
 
 </details>

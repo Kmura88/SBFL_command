@@ -4,9 +4,9 @@ import os
 
 FAIL_PATH = "../.SBFL_data/fail_test"
 PASS_PATH = "../.SBFL_data/pass_test"
-CSV_PATH = "../summary.csv"
+CSV_PATH =  "../summary.csv"
 
-class SBFL_BASE:
+class SBFL_base:
 	def __init__(self):
 		fail_counter = LEC.LineExecutionCounter(FAIL_PATH)
 		pass_counter = LEC.LineExecutionCounter(PASS_PATH)
@@ -43,15 +43,17 @@ class SBFL_BASE:
 			ep_list = self.ep.get(cls, [])
 			nf_list = self.nf.get(cls, [])
 			np_list = self.np.get(cls, [])
-
-			print(f"{'Line':>4} | {'ef':>4} | {'ep':>4} | {'nf':>4} | {'np':>4}")
-			max_len = max(len(ef_list), len(ep_list), len(nf_list), len(np_list))
+			sus_list = self.suspecious.get(cls, [])
+			print(f"{'Line':>4} | {'ef':>4} | {'ep':>4} | {'nf':>4} | {'np':>4} | {'sus':>8}")
+			print("-" * 44)
+			max_len = max(len(ef_list), len(ep_list), len(nf_list), len(np_list), len(sus_list))
 			for i in range(max_len):
 				ef = ef_list[i] if i < len(ef_list) else "-"
 				ep = ep_list[i] if i < len(ep_list) else "-"
 				nf = nf_list[i] if i < len(nf_list) else "-"
 				np = np_list[i] if i < len(np_list) else "-"
-				print(f"{i:>4} | {ef:>4} | {ep:>4} | {nf:>4} | {np:>4}")
+				sus = f"{sus_list[i]:.4f}" if i < len(sus_list) else "-"
+				print(f"{i:>4} | {ef:>4} | {ep:>4} | {nf:>4} | {np:>4} | {sus:>8}")
 			print()
 	
 	def save_execution_summary(self, file_path=CSV_PATH):
@@ -82,7 +84,5 @@ class SBFL_BASE:
 
 		print(f"✅ 実行サマリCSVを書き出しました → {file_path}")
 
-if __name__ == "__main__":
-	SB = SBFL_BASE()
-	SB.print_execution_summary()
-	SB.save_execution_summary()
+	def _calc_suspecious(self):
+		None
