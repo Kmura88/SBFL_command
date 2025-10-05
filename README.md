@@ -46,5 +46,5 @@ $ run.bat com.example.MainTest
 
 # メモ
 
-1. lib内のjacoco-0.8.13, apache-maven-3.9.11は公式からダウンロード
-2. libでのフォルダ名はjacoco, mavenにする必要あり。
+1. lib内のjacoco-0.8.13, junit は公式からダウンロード
+2. libでのフォルダ名はjacoco, junitにする必要あり。

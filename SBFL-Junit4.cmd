@@ -1,13 +1,13 @@
 @echo off
 cd /d %~dp0
 
+call lib\config.cmd
+
 set CLASS_NAME=%1
-set METHOD_NAME=testScalene1
-set TMP_FOLDER=.SBFL_data
 
 rem 構文チェック
 if "%CLASS_NAME%"=="" (
-	echo [Error] usage : run.bat class
+	echo [Error] usage : %0 CLASS_NAME
 	exit /b
 )
 
@@ -32,14 +32,9 @@ rem 一時フォルダの作成
 mkdir %TMP_FOLDER%
 attrib +h %TMP_FOLDER%
 
-rem .execの生成
-java -javaagent:lib/jacoco/jacocoagent.jar=destfile=%TMP_FOLDER%/jacoco.exec,append=false -cp "lib/junit/junit-4.13.2.jar;lib/junit/hamcrest-core-1.3.jar;classes" RunSingleTest %CLASS_NAME% %METHOD_NAME%
+rem 成功テスト・失敗テストの格納場所
+mkdir %TMP_FOLDER%\pass_test
+mkdir %TMP_FOLDER%\fail_test
 
-rem .xmlの生成
-java -jar lib/jacoco/jacococli.jar report %TMP_FOLDER%/jacoco.exec --classfiles classes --sourcefiles src --xml %TMP_FOLDER%/report.xml
-
-rem htmlの生成
-java -jar lib/jacoco/jacococli.jar report %TMP_FOLDER%/jacoco.exec --classfiles classes --sourcefiles src --html report
-
-rem .xmlデータの読み込み
-python ./lib/XmlAnalyzer.py %TMP_FOLDER%/report.xml
+rem MethodParserAndRunnerの実行
+java -cp "lib/junit/junit-4.13.2.jar;lib/junit/hamcrest-core-1.3.jar;classes" MethodParserAndRunner %CLASS_NAME%
