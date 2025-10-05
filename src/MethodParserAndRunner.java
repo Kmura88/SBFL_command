@@ -15,7 +15,7 @@ public class MethodParserAndRunner {
         // 2. 実行対象のテストクラス
         String className = args[0];
         
-        // 3. 呼び出したい .cmd ファイルのパス
+        // 3. xml_maker_junit4のパス。一番上の階層にいることを想定
         String cmdFilePath = "lib\\xml_maker_junit4.cmd";
 
         // 4. テストクラスのロード

@@ -4,7 +4,7 @@ import sys
 class XmlAnalyzer:
     def __init__(self,xml_path):
         self.xml_path=xml_path  # .xmlファイルへのパス
-        self.coverages = {}     # Map<クラス名,行ごとのbooleanカバレッジ配列>
+        self.coverages = {}     # Map< クラス名, 各クラスの行ごとのカバレッジboolean[] >
         self._calc_coverages()  # xml解析
 
     def print_coverages(self):

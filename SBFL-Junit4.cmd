@@ -38,3 +38,5 @@ mkdir %TMP_FOLDER%\fail_test
 
 rem MethodParserAndRunnerの実行
 java -cp "lib/junit/junit-4.13.2.jar;lib/junit/hamcrest-core-1.3.jar;classes" MethodParserAndRunner %CLASS_NAME%
+
+rem python ./lib/XmlAnalyzer.py %TMP_FOLDER%/fail_test/%CLASS_NAME%.%METHOD_NAME%.xml
