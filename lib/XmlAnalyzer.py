@@ -1,6 +1,8 @@
 import xml.etree.ElementTree as ET
 import sys
 
+IGNORE_LIST = ["/RunSingleTest.java","/MethodParserAndRunner.java"]
+
 class XmlAnalyzer:
     def __init__(self,xml_path):
         self.xml_path=xml_path  # .xmlファイルへのパス
@@ -25,6 +27,9 @@ class XmlAnalyzer:
                 package_name = xml_pkg.get("name")  # ex) com/example
                 src_name =  xml_src.get("name")     # ex) Main.java
                 fqn = package_name + '/' + src_name # ex) com/example/Main.java
+
+                if fqn.endswith("Test.java") or fqn in IGNORE_LIST: # 不要なクラス、テストクラスのカバレッジは無視
+                    continue
 
                 xml_line = xml_src.findall("line")
                 covered = [False] * (int(xml_line[-1].get("nr")) + 1)  # boolean配列サイズ = 最後の命令行

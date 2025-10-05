@@ -70,6 +70,12 @@ $ run.bat com.example.MainTest
         - `RunSingleTest`の返り値でテストのpass, failを判定
         - pass, failに応じて.xmlの格納場所の変更
 5. nf,ef,np,epの計算
+    - xmlファイルのデータを各クラスの行ごとのカバレッジ(boolean)に変換
+        - `XmlAnalyzer.py`が担当
+        - `/MethodParserAndRunner.java`,`/RunSingleTest.java`,末尾が`Test.java`で終わるファイルのカバレッジをここで無視する。
+    - xmlファイルを全探索して`XmlAnalyzer.py`を呼び出し、行ごとの実行回数(int)に変換
+        - `LineExcutionCounter.py`が担当
+    - 
 
 
 </details>
