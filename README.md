@@ -1,4 +1,15 @@
-# How to use
+# How to Use
+
+``` console
+$ SBFL-junit4.cmd (testclass名)
+```
+
+例
+```console
+$ SBFL-junit4.cmd com.example.TriangleTest
+```
+
+# 準備
 
 classesフォルダにpackage通りの階層構造でクラスファイルを入れる。
 javaプログラム実行に必要。
@@ -27,20 +38,8 @@ src/
 ```
 
 
-現状はクラスファイルに対するSBFL
-srcはGumTreeしなけれなくても問題なし。
-
-``` console
-$ run.bat (testclass名)
-```
-
-例
-```console
-$ run.bat com.example.MainTest
-```
-
 # 必要
-1. .batのためWindows環境
+1. .cmdのためWindows環境
 2. コマンドラインで`python`が実行できる
 3. コマンドラインで`java`が実行できる
 4. Junit4
@@ -49,7 +48,6 @@ $ run.bat com.example.MainTest
 
 1. lib内のjacoco-0.8.13, junit は公式からダウンロード
 2. libでのフォルダ名はjacoco, junitにする必要あり。
-3. 文,ファイルによって参照している%cd%が異なり参照パスがぐちゃぐちゃ。
 
 <details><summary>内部での処理</summary>
 
