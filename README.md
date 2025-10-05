@@ -82,5 +82,21 @@ src/
         - `SBFL_Oshiai.py`が担当
         - `SBFL_Oshiai.py`は`SBFL_base.py`の継承クラス
 
+</details>
+
+<details><summary>非常用</summary>
+
+cdは一番上のディレクトリ。
+`RunSingleTest.java`の再コンパイルコマンド
+
+```console
+$ javac -d classes -cp lib/junit/junit-4.13.2.jar src/RunSingleTest.java
+```
+
+`MethodParserAndRunner.java`の再コンパイルコマンド
+
+```console
+$ javac -d classes -cp lib/junit/junit-4.13.2.jar src/MethodParserAndRunner.java
+```
 
 </details>
