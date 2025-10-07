@@ -42,7 +42,7 @@ src/
 1. .cmdのためWindows環境
 2. コマンドラインで`python`が実行できる
 3. コマンドラインで`java`が実行できる
-4. Junit4
+4. SBFL対象はJunit4
 
 # メモ
 
@@ -101,3 +101,4 @@ $ javac -d classes -cp lib/junit/junit-4.13.2.jar src/MethodParserAndRunner.java
 
 
 </details>
+
