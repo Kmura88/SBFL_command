@@ -6,7 +6,7 @@ $ SBFL-junit4.cmd (testclass名)
 
 例
 ```console
-$ SBFL-junit4.cmd example.TriangleTest
+$ SBFL-junit4.cmd example.Triangle.TriangleTest
 ```
 
 # 準備
@@ -98,5 +98,6 @@ $ javac -d classes -cp lib/junit/junit-4.13.2.jar src/RunSingleTest.java
 ```console
 $ javac -d classes -cp lib/junit/junit-4.13.2.jar src/MethodParserAndRunner.java
 ```
+
 
 </details>
