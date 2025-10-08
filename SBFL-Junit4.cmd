@@ -23,7 +23,7 @@ if not exist "classes" (
 )
 
 rem srcフォルダが有るか
-if not exist "src" (
+if not exist "%SRC_FOLDER%" (
 	echo [Error] src Folder not found.
 	exit /b 1
 )
