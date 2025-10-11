@@ -32,6 +32,11 @@ class XmlAnalyzer:
                     continue
 
                 xml_line = xml_src.findall("line")
+
+                if not xml_line:
+                    print(f"[Warning] No <line> tags found in {fqn}. Skipping this file.")
+                    continue
+
                 covered = [False] * (int(xml_line[-1].get("nr")) + 1)  # boolean配列サイズ = 最後の命令行
 
                 for xl in xml_line:
