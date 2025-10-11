@@ -1,11 +1,18 @@
 import XmlAnalyzer as XA
 from pathlib import Path
 import sys
+import logging
 
+logging.basicConfig(
+    level=logging.INFO, # INFOレベル以上のログを記録
+    format='%(asctime)s - %(levelname)s - %(name)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
 
 class LineExecutionCounter:
-	def __init__(self,file_path):
-		self.file_path = Path(file_path)  # xmlがあるファイルへのパス
+	def __init__(self,folder_path):
+		self.logger = logging.getLogger(self.__class__.__name__)
+		self.folder_path = Path(folder_path)  # xmlがあるファイルへのパス
 		self.execution_counter = {}       # Map< クラス名, 各クラスの行ごとの実行回数int[] >
 		self.total_counter = 0            # テストの実行回数
 		self._calc_counter()
@@ -23,7 +30,7 @@ class LineExecutionCounter:
 				print(f"  Line {i}: {arr[i]}")
 
 	def _calc_counter(self):
-		xml_paths = self.file_path.rglob('*') # .xmlファイルを全探索
+		xml_paths = self.folder_path.rglob('*') # .xmlファイルを全探索
 		for xml_path in xml_paths:
 			self.total_counter += 1
 			XmlAnalyzer = XA.XmlAnalyzer(xml_path)
@@ -34,6 +41,8 @@ class LineExecutionCounter:
 				for i, covered in enumerate(bools):
 					if covered:
 						self.execution_counter[cls][i] += 1  # 実行された回数を加算
+
+		self.logger.info(f"Completed the LineExecutionCounter calculation for {self.folder_path}")
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
