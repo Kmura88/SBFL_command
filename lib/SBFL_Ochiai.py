@@ -1,9 +1,18 @@
 from SBFL_base import SBFL_base as SBFL
 import math
+import logging
+
+logging.basicConfig(
+    level=logging.INFO, # INFOレベル以上のログを記録
+    format='%(asctime)s - %(levelname)s - %(name)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+
 
 class SBFL_Ochiai(SBFL):
 	def __init__(self):
 		super().__init__()
+		self.logger = logging.getLogger(self.__class__.__name__)
 		self._calc_suspecious()
 
 	def _calc_suspecious(self):
@@ -22,6 +31,8 @@ class SBFL_Ochiai(SBFL):
 					susp_list.append(ef / denom)
 
 			self.suspecious[cls] = susp_list
+		
+		self.logger.info(f"Finished ra_suspecious calculation for {cls}")
 
 
 if __name__ == "__main__":
