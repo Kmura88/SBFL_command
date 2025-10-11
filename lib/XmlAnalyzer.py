@@ -1,10 +1,18 @@
 import xml.etree.ElementTree as ET
 import sys
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(name)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
 
 IGNORE_LIST = ["/RunSingleTest.java","/MethodParserAndRunner.java"]
 
 class XmlAnalyzer:
     def __init__(self,xml_path):
+        self.logger = logging.getLogger(self.__class__.__name__)
         self.xml_path=xml_path  # .xmlファイルへのパス
         self.coverages = {}     # Map< クラス名, 各クラスの行ごとのカバレッジboolean[] >
         self._calc_coverages()  # xml解析
@@ -34,7 +42,7 @@ class XmlAnalyzer:
                 xml_line = xml_src.findall("line")
 
                 if not xml_line:
-                    print(f"[Warning] No <line> tags found in {fqn}. Skipping this file.")
+                    # line tag がなければ continue
                     continue
 
                 covered = [False] * (int(xml_line[-1].get("nr")) + 1)  # boolean配列サイズ = 最後の命令行
@@ -46,6 +54,7 @@ class XmlAnalyzer:
 
                 self.coverages[fqn] = covered
 
+        self.logger.info(f"Analyzed: {self.xml_path}")
     
 
 if __name__ == "__main__":
