@@ -3,3 +3,5 @@
 *.csv
 /.SBFL_data/
 /report/
+
+lib/__pycache__/
