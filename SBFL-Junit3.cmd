@@ -37,7 +37,7 @@ mkdir %TMP_FOLDER%\pass_test
 mkdir %TMP_FOLDER%\fail_test
 
 rem MethodParserAndRunnerの実行
-java -cp classes MethodParserAndRunnerForJUnit3 %CLASS_NAME%
+java -cp "lib/junit/junit-4.13.2.jar;lib/junit/hamcrest-core-1.3.jar;classes" MethodParserAndRunnerForJUnit3 %CLASS_NAME%
 
 rem MethodParserAndRunnerが異常終了した場合
 if %ERRORLEVEL% == 1 (
