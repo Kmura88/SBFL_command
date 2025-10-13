@@ -32,7 +32,7 @@ class SBFL_Ochiai(SBFL):
 
 			self.suspecious[cls] = susp_list
 		
-		self.logger.info(f"Finished ra_suspecious calculation for {cls}")
+		self.logger.info(f"Finished suspecious calculation")
 
 
 if __name__ == "__main__":
