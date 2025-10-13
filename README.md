@@ -86,7 +86,8 @@ src/
 
 <details><summary>非常用</summary>
 
-cdは一番上のディレクトリ。
+以下すべて、cdは一番上のディレクトリ。
+
 `RunSingleTest.java`の再コンパイルコマンド
 
 ```console
@@ -99,6 +100,17 @@ $ javac -d classes -cp lib/junit/junit-4.13.2.jar src/RunSingleTest.java
 $ javac -d classes -cp lib/junit/junit-4.13.2.jar src/MethodParserAndRunner.java
 ```
 
+`RunSingleTestForJUnit3.java`の再コンパイルコマンド
+
+```console
+$ javac -d classes -cp lib/junit/junit-4.13.2.jar src/RunSingleTestForJUnit3.java
+```
+
+`MethodParserAndRunnerForJUnit3.java`の再コンパイルコマンド
+
+```console
+$ javac -d classes src/MethodParserAndRunnerForJUnit3.java
+```
 
 </details>
 
