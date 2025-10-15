@@ -8,7 +8,7 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S'
 )
 
-IGNORE_LIST = ["/RunSingleTest.java","/MethodParserAndRunner.java"]
+IGNORE_LIST = ["/RunSingleTest.java","/MethodParserAndRunner.java","/MethodParserAndRunnerForJUnit3.java","/RunSingleTestForJUnit3.java"]
 
 class XmlAnalyzer:
     def __init__(self,xml_path):
